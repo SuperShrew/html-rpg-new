@@ -6,8 +6,20 @@
     background-color: grey;
     border-style: groove;
     border-color: blueviolet;
-    border-width: medium;
+    border-width: 16px;
 }
-body {
+* {
     font-family: pixel;
+}
+
+button {
+    padding: 3px;
+    border-radius: 0px;
+    border-color: inherit;
+    border-style: double;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+body {
+    background-color: #333333;
 }
