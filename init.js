@@ -1,2 +1,2 @@
-const gameArea = document.getElementByClass("game");
+const gameArea = document.getElementById("game");
 gameArea.text = "test";
