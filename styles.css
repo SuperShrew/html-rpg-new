@@ -1,0 +1,13 @@
+@font-face {
+    font-family: "pixel";
+    src: url(PixelifySans-VariableFont_wght.ttf);
+}
+.window {
+    background-color: grey;
+    border-style: groove;
+    border-color: blueviolet;
+    border-width: medium;
+}
+body {
+    font-family: pixel;
+}
