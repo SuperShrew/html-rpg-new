@@ -1,4 +1,13 @@
 const gameArea = document.getElementById("game");
+const ctx = gameArea.getContext("2d");
+//ctx.fillStyle = "red";
+//ctx.fillRect(50, 50, 150, 75);
+ctx.moveTo(0, 0);
+ctx.lineTo(200, 100);
+ctx.stroke();
+function cleer() {
+    ctx.clearRect(0, 0, 512, 512);
+}
 const menuBox = document.getElementById("menu");
 menuBox.innerHTML += "<h1> test </h1>";
 
