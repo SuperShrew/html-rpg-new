@@ -8,9 +8,31 @@ document.addEventListener("keyup", function onEvent(event) {
 });
 console.log("Waw");
 
-function update() {
-    //move(keysPressed);
+let player = null;
+let speed = 1.5
 
+elements.forEach(element => {
+    if (element.id == "player") {
+        player = element;
+        console.log(player);
+    }
+});
+
+function update() {
+    if (keysPressed["a"]) {
+        move(player, -speed, 0);
+    }
+    if (keysPressed["s"]) {
+        move(player, 0, speed);
+    }
+    if (keysPressed["d"]) {
+        move(player, speed, 0);
+    }
+    if (keysPressed["w"]) {
+        move(player, 0, -speed);
+    }
+
+    drawCanvas();
     requestAnimationFrame(update);
 }
 
