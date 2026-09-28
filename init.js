@@ -5,7 +5,7 @@ const ctx = gameArea.getContext("2d");
 ctx.moveTo(0, 0);
 ctx.lineTo(200, 100);
 ctx.stroke();
-function cleer() {
+function clear() {
     ctx.clearRect(0, 0, 512, 512);
 }
 const menuBox = document.getElementById("menu");
@@ -20,12 +20,39 @@ function colours(colour1, colour2) { // add colour 3 4 and 5 for button text and
             <button onclick="switchText()">Flip text colour</button>
         `;
     } else if (colour1[0] && colour2[0]) {
-        console.log("wawo");
         let elements = document.querySelectorAll(".window");
         elements.forEach(element => {
             element.style.backgroundColor = colour1[0].value;
-            console.log("sigh");
             element.style.borderColor = colour2[0].value;
         });
     }
+}
+
+function move(element, deltax, deltay) {
+    element.x += deltax;
+    element.y += deltay;
+    element.forEach(child => {
+        if (isClass(child)) {
+            move(child, deltax, deltay);
+        }
+    });
+    drawCanvas();
+}
+function drawCanvas() {
+    elements.forEach(element => {
+        if (element.type == "rect") {
+            draw(element);
+        } else {
+            // logic for when sprite images are used
+        }
+    })
+}
+function draw(element) {
+    ctx.fillStyle = element.colour
+    ctx.fillRect(element.width, element.height, element.x, element.y);
+    element.forEach(child => {
+        if (isClass(child)) {
+            draw(child);
+        }
+    });
 }
