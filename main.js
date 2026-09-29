@@ -9,7 +9,7 @@ document.addEventListener("keyup", function onEvent(event) {
 console.log("Waw");
 
 let player = null;
-let speed = 1.5
+let speed = 1.5;
 
 elements.forEach(element => {
     if (element.id == "player") {
@@ -31,6 +31,14 @@ function update() {
     if (keysPressed["w"]) {
         move(player, 0, -speed);
     }
+    if (player.x > width-player.width) {
+        player.x = width-player.width;
+    }
+    if (player.y > height-player.height) {
+        player.y = height-player.height;
+    }
+    player.y = Math.abs(player.y);
+    player.x = Math.abs(player.x);
 
     drawCanvas();
     requestAnimationFrame(update);
