@@ -6,10 +6,12 @@ document.addEventListener("keydown", function onEvent(event) {
 document.addEventListener("keyup", function onEvent(event) {
     keysPressed[event.key] = false;
 });
-console.log("Waw");
+console.log("Wawo");
 
 let player = null;
 let speed = 1.5;
+const width = gameArea.width;
+const height = gameArea.height;
 
 elements.forEach(element => {
     if (element.id == "player") {
