@@ -13,7 +13,7 @@ ctx.lineTo(200, 100);
 ctx.stroke();
 
 class Element { // class for all elements on the screen, could be replaced with an object in the future depending on performance and stuff
-    constructor(type, width, height, x, y, colour, offsetx, offsety, parent, id, viscosity=1) {
+    constructor(type, width, height, x, y, colour, offsetx, offsety, parent, id, friction=1) {
         this.type = type;
         this.width = width;
         this.height = height;
@@ -24,11 +24,13 @@ class Element { // class for all elements on the screen, could be replaced with 
         this.offsety = offsety;
         this.parent = parent;
         this.id = id;
-        this.viscosity = viscosity;
+        this.friction = friction;
     }
 }
 
 elements.push(new Element("rect", 40, 40, 40, 40, "red", 0, 0, null, "player"));
+elements.push(new Element("rect", 100, 100, 250, 200, "purple", 0, 0, null, "bigolblock"));
+elements.push(new Element("rect", 100, 100, 400, 100, "green", 0, 0, null, "bigolsand", 0.2));
 
 function clear() { //obselite
     ctx.clearRect(0, 0, 512, 512);
@@ -81,7 +83,8 @@ function drawCanvas() { // iterates through all elements and draws each one onto
         } else if (element.type == "sprite") {
             // logic for when sprite images are used
         }
-    })
+    });
+    draw(elements.find(e => e.id == "player"));
 }
 function draw(element) { // draws a specific element to the canvas (inc children)
     ctx.fillStyle = element.colour;
@@ -92,5 +95,32 @@ function draw(element) { // draws a specific element to the canvas (inc children
                 draw(child);
             }
         });
+    }
+}
+function checkCollisions(element) {
+    let o = null
+    elements.forEach(object => {
+        let x1 = element.x;
+        let x2 = object.x;
+        let y1 = element.y;
+        let y2 = object.y;
+        let xw1 = element.x + element.width;
+        let xw2 = object.x + object.width;
+        let yh1 = element.y + element.height;
+        let yh2 = object.y + object.height;
+        if (object == element) {
+            console.log("passed player");
+        } else if ((xw1 > x2  && x1 < xw2) && (yh1 > y2 && y1 < yh2)) {
+            o = object;
+            return;
+        } else if ((xw2 > x1  && x2 < xw1) && (yh2 > y1 && y2 < yh1)) {
+            o = object;
+            return;
+        }
+    });
+    if (o) {
+        return [element, o];
+    } else {
+        return false;
     }
 }
